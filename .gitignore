@@ -3,6 +3,9 @@
 
 # ignore irr res files
 StrategyWar/res/irr/
+res/irr/
+StrategyWar/res/irr2/
+res/irr2/
 
 # User-specific files
 *.suo
