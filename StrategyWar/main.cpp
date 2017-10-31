@@ -14,7 +14,7 @@ int main() {
 	scene::ISceneManager* smgr = device->getSceneManager();
 	gui::IGUIEnvironment* guienv = device->getGUIEnvironment();
 
-	guienv->addStaticText(L"Hello World! This is the Irrlicht Software renderer!", core::rect<s32>(10, 10, 260, 22), true);
+	guienv->addStaticText(L"Hello World! Test Text!", core::rect<s32>(10, 10, 260, 22), true);
 	scene::IAnimatedMesh* mesh = smgr->getMesh("res/irr/sydney.md2");
 	if (!mesh)
 	{
