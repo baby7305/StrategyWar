@@ -7,7 +7,7 @@ int main() {
 	IrrlichtDevice *device = createDevice(video::EDT_DIRECT3D9, core::dimension2d<u32>(640, 480), 32, false, false, true, nullptr);
 
 	if (!device)
-		return 1;
+		return 0;
 
 	device->setWindowCaption(L"StrategyWar: WW1");
 	video::IVideoDriver* driver = device->getVideoDriver();
