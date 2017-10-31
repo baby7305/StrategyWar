@@ -1,54 +1,47 @@
-//Singleton from Ogre engine
+//Singleton from KwunchaLichuntsa / Singleton on GitHub.com
+// https://github.com/KwunchaLichuntsa/Singleton
 #pragma once
-#include <assert.h>
-#ifdef _MSC_VER
-	//#pragma warning (push)
-	//#pragma warning ( disable: 4661)
-#endif
 
-#define SINGLEON_CPP(OBJ) template<> OBJ * Util::Singleton< OBJ >::msSingleton = 0; 
+//Prevent more than one instantiation
+#define SINGLETON_HPP(OBJ) friend class Util::Singleton< OBJ >; \
+						   protected: \
+						   OBJ() {}; \
+						   virtual ~OBJ() = default;
 
+#define SINGLETON_SPECIAL_CONSTRUCTOR(OBJ) friend class Util::Singleton< OBJ >; \
+										   protected: \
+										   OBJ(); \
+										   virtual ~OBJ() = default;
+
+//Helper class
 namespace Util {
-
-	template <typename T>
-	class Singleton
-	{
-	private:
-		Singleton(const Singleton<T> &);
-		Singleton& operator=(const Singleton<T> &);
-
+	class NonCopyable {
 	protected:
-		static T* msSingleton;
-
+		NonCopyable() = default;
+		virtual ~NonCopyable() {};
+	
+	private:
+		NonCopyable(const NonCopyable& rhs);
+		NonCopyable operator=(NonCopyable& rhs);
+		NonCopyable(NonCopyable&& other);
+		NonCopyable& operator=(NonCopyable&& rhs);
+	};
+	
+	template <typename T>
+	class Singleton : NonCopyable
+	{
 	public:
-		Singleton() {
-			assert(!msSingleton);
-			#if defined( _MSC_VER ) && _MSC_VER < 1200   
-			int offset = (int)(T*)1 - (int)(Singleton <T>*)(T*)1;
-			msSingleton = (T*)((int)this + offset);
-			#else
-			msSingleton = static_cast< T* >(this);
-			#endif
+	
+		static T& getSingleton() {
+			static T t;
+			return t;
 		}
-
-		~Singleton(){
-			assert(msSingleton);
-			msSingleton = nullptr;
+	
+		static T* getSingletonPtr() {
+			return &getSingleton();
 		}
-		/// Get the singleton instance
-		static T& getSingleton()
-		{
-			assert(msSingleton);
-			return (*msSingleton);
-		}
-
-		static T* getSingletonPtr()
-		{
-			return msSingleton;
-		}
+	
+	protected:
+		explicit Singleton<T>() {};
 	};
 }
-
-#ifdef _MSC_VER
-	//#pragma warning (pop)
-#endif

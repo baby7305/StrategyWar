@@ -6,11 +6,10 @@
 #include "../Util/Singleton.h"
 
 namespace game {
-	class EventHandler : public irr::IEventReceiver, Util::Singleton<EventHandler>
+	class EventHandler : public irr::IEventReceiver, public Util::Singleton<EventHandler>
 	{
+		SINGLETON_HPP(EventHandler)
 	public:
-		EventHandler();
-		~EventHandler();
-		virtual bool onEvent(const irr::SEvent& event);
+		virtual bool OnEvent(const irr::SEvent& event) override;
 	};
 }

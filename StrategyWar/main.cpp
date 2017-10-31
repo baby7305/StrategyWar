@@ -1,10 +1,18 @@
+//C++ Header
+//API-Header
 #include <irrlicht.h>
+//Own Header
 #include "Util\Singleton.h"
+#include "Controls\EventHandler.h"
+#include "Controls\InputHandler.h"
 using namespace irr;
 
 int main() {
 
-	IrrlichtDevice *device = createDevice(video::EDT_DIRECT3D9, core::dimension2d<u32>(640, 480), 32, false, false, true, nullptr);
+	//game::EventHandler eventHandler;
+	//game::InputHandler inputHandler;
+	//auto d = std::move(game::InputHandler::getSingleton());
+	IrrlichtDevice *device = createDevice(video::EDT_DIRECT3D9, core::dimension2d<u32>(640, 480), 32, false, false, true, game::EventHandler::getSingletonPtr());
 
 	if (!device)
 		return 1;

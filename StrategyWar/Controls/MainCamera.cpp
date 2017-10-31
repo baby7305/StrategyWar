@@ -1,9 +1,14 @@
 #include "MainCamera.h"
 
-MainCamera::MainCamera()
-{
-}
+namespace game{
+	MainCamera::MainCamera()
+	{
 
-MainCamera::~MainCamera()
-{
+	}
+	
+	MainCamera::~MainCamera()
+	{
+
+	}
+
 }
