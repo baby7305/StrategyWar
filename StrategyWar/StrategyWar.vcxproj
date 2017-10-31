@@ -158,9 +158,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Controls\EventHandler.cpp" />
+    <ClCompile Include="Controls\InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Controls\MainCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Controls\MainCamera.h" />
+    <ClInclude Include="Controls\EventHandler.h" />
+    <ClInclude Include="Controls\InputHandler.h" />
     <ClInclude Include="Util\Singleton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

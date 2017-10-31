@@ -1,11 +1,12 @@
 //Singleton from Ogre engine
 #pragma once
+#include <assert.h>
 #ifdef _MSC_VER
 	//#pragma warning (push)
 	//#pragma warning ( disable: 4661)
 #endif
 
-#define SINGLEON_CPP(OBJ) template<> OBJ* Ogre::Singleton<OBJ>::msSingleton = 0; 
+#define SINGLEON_CPP(OBJ) template<> OBJ * Util::Singleton< OBJ >::msSingleton = 0; 
 
 namespace Util {
 

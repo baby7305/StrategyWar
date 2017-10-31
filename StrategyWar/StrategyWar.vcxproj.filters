@@ -8,8 +8,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Controls\MainCamera.cpp" />
+    <ClCompile Include="Controls\EventHandler.cpp" />
+    <ClCompile Include="Controls\InputHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Util\Singleton.h" />
+    <ClInclude Include="Controls\MainCamera.h" />
+    <ClInclude Include="Controls\EventHandler.h" />
+    <ClInclude Include="Controls\InputHandler.h" />
   </ItemGroup>
 </Project>

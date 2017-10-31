@@ -7,6 +7,10 @@ res/irr/
 StrategyWar/res/irr2/
 res/irr2/
 
+#obj output folder
+Intermediates/
+StrategyWar/Intermediates/
+
 # User-specific files
 *.suo
 *.user

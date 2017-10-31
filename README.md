@@ -1,2 +1,2 @@
-# STrategyWar
-This is a RTS game
+# StrategyWar
+This is a RTS game, using the irrlicht engine
