@@ -4,9 +4,9 @@
 //Own Header
 #include "InputHandler.h"
 
-//SINGLEON_CPP(game::InputHandler)
 namespace game{
 	InputHandler::InputHandler()
+		: m_mouseWheel(0.0f)
 	{
 		m_keys.fill(false);
 		m_keysOnce.fill(false);
@@ -21,42 +21,26 @@ namespace game{
 		}
 
 		m_keys[e.Key] = e.PressedDown;
-
-		std::cout << e.Key << '\n';
 	}
 
 	void InputHandler::mouseEvent(const irr::SEvent::SMouseInput& e)
 	{
-		mousePos.X = e.X;
-		mousePos.Y = e.Y;
+		m_mousePos.X = e.X;
+		m_mousePos.Y = e.Y;
 
 		switch (e.Event)
 		{
 		case irr::EMOUSE_INPUT_EVENT::EMIE_LMOUSE_PRESSED_DOWN:
-			if (!m_keys[numKeyboardKeys + 1]) {
-				m_keysOnce[numKeyboardKeys + 1] = true;
-			}else{
-				m_keysOnce[numKeyboardKeys + 1] = false;
-			}
 			m_keys[numKeyboardKeys + 1] = true;
+			m_keysOnce[numKeyboardKeys + 1] = true;
 			break;
 		case irr::EMOUSE_INPUT_EVENT::EMIE_RMOUSE_PRESSED_DOWN:
-			if (!m_keys[numKeyboardKeys + 2]) {
-				m_keysOnce[numKeyboardKeys + 2] = true;
-			}
-			else {
-				m_keysOnce[numKeyboardKeys + 2] = false;
-			}
 			m_keys[numKeyboardKeys + 2] = true;
+			m_keysOnce[numKeyboardKeys + 2] = true;
 			break;
 		case irr::EMOUSE_INPUT_EVENT::EMIE_MMOUSE_PRESSED_DOWN:
-			if (!m_keys[numKeyboardKeys + 3]) {
-				m_keysOnce[numKeyboardKeys + 3] = true;
-			}
-			else {
-				m_keysOnce[numKeyboardKeys + 3] = false;
-			}
 			m_keys[numKeyboardKeys + 3] = true;
+			m_keysOnce[numKeyboardKeys + 3] = true;
 			break;
 		case irr::EMOUSE_INPUT_EVENT::EMIE_LMOUSE_LEFT_UP:
 			m_keys[numKeyboardKeys + 1] = false;
@@ -73,6 +57,7 @@ namespace game{
 		case irr::EMOUSE_INPUT_EVENT::EMIE_MOUSE_MOVED:
 			break;
 		case irr::EMOUSE_INPUT_EVENT::EMIE_MOUSE_WHEEL:
+			m_mouseWheel = e.Wheel;
 			break;
 		default:
 			break;
@@ -87,5 +72,26 @@ namespace game{
 	bool InputHandler::isPressedOnce(const irr::EKEY_CODE key) const
 	{
 		return m_keysOnce[key];
+	}
+
+	bool InputHandler::isMousePressed(const MouseButton button) const
+	{
+		return m_keys[numKeyboardKeys + button + 1];
+	}
+
+	bool InputHandler::isMousePressedOnce(const MouseButton button) const
+	{
+		return m_keysOnce[numKeyboardKeys + button + 1];
+	}
+
+	irr::f32 InputHandler::getWheelStatus() const
+	{
+		return m_mouseWheel;
+	}
+
+	void InputHandler::frameFinished()
+	{
+		m_mouseWheel = 0.0f;
+		m_keysOnce.fill(false);
 	}
 }

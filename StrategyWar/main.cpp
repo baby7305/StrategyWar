@@ -1,4 +1,5 @@
 //C++ Header
+#include <iostream>
 //API-Header
 #include <irrlicht.h>
 //Own Header
@@ -39,12 +40,18 @@ int main() {
 
 	while (device->run())
 	{
+		//rendering
 		driver->beginScene(true, true, video::SColor(255, 100, 101, 140));
-
 		smgr->drawAll();
 		guienv->drawAll();
-
 		driver->endScene();
+
+		//show FPS
+		if((device->getTimer()->getTime() % 60) < 10)
+			std::cout << "FPS: " << driver->getFPS() << '\n';
+
+		//signal InputHandler the frame is finished
+		game::InputHandler::getSingletonPtr()->frameFinished();
 	}
 
 	device->drop();

@@ -5,13 +5,19 @@
 //Prevent more than one instantiation
 #define SINGLETON_HPP(OBJ) friend class Util::Singleton< OBJ >; \
 						   protected: \
-						   OBJ() {}; \
+						   OBJ() = default; \
 						   virtual ~OBJ() = default;
 
 #define SINGLETON_SPECIAL_CONSTRUCTOR(OBJ) friend class Util::Singleton< OBJ >; \
 										   protected: \
 										   OBJ(); \
 										   virtual ~OBJ() = default;
+
+#define SINGLETON_SPECIAL_CON_DES(OBJ) friend class Util::Singleton< OBJ >; \
+						   protected: \
+						   OBJ(); \
+						   virtual ~OBJ();
+
 
 //Helper class
 namespace Util {

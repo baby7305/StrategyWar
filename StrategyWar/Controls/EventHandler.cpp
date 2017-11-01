@@ -4,7 +4,6 @@
 #include "EventHandler.h"
 #include "InputHandler.h"
 
-//SINGLEON_CPP(game::EventHandler)
 namespace game{
 
 	bool EventHandler::OnEvent(const irr::SEvent& event)
