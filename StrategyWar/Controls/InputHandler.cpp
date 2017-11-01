@@ -18,7 +18,6 @@ namespace game{
 		}else{
 			m_keysOnce[e.Key] = false;
 		}
-
 		m_keys[e.Key] = e.PressedDown;
 	}
 
