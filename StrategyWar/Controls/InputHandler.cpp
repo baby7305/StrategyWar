@@ -1,5 +1,4 @@
 //C++ Header
-#include <iostream>
 //API-Header
 //Own Header
 #include "InputHandler.h"
