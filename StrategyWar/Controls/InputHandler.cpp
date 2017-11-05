@@ -23,8 +23,6 @@ namespace game{
 
 	void InputHandler::mouseEvent(const irr::SEvent::SMouseInput& e)
 	{
-		m_mousePos.X = e.X;
-		m_mousePos.Y = e.Y;
 
 		switch (e.Event)
 		{
@@ -53,6 +51,8 @@ namespace game{
 			m_keysOnce[numKeyboardKeys + 3] = false;
 			break;
 		case irr::EMOUSE_INPUT_EVENT::EMIE_MOUSE_MOVED:
+			m_mousePos.X = e.X;
+			m_mousePos.Y = e.Y;
 			break;
 		case irr::EMOUSE_INPUT_EVENT::EMIE_MOUSE_WHEEL:
 			m_mouseWheel = e.Wheel;

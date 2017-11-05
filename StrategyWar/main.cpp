@@ -6,19 +6,28 @@
 #include "Util\Singleton.h"
 #include "Controls\EventHandler.h"
 #include "Controls\InputHandler.h"
+#include "Controls\MainCamera.h"
 using namespace irr;
 
 int main() {
-	IrrlichtDevice *device = createDevice(video::EDT_DIRECT3D9, core::dimension2d<u32>(800, 600), 32, false, false, true, game::EventHandler::getSingletonPtr());
 
-	if (!device)
-		return 1;
+	//Setup
+	IrrlichtDevice *device = createDevice(video::EDT_DIRECT3D9, core::dimension2d<u32>(800, 600), 32, false/*fullscreen*/, false/*stencilBuffer*/, true/*vsync*/, game::EventHandler::getSingletonPtr());
 
+	if (!device) {
+		return EXIT_FAILURE;
+	}
+
+	//get important pointer
 	device->setWindowCaption(L"StrategyWar: WW1");
 	video::IVideoDriver* driver = device->getVideoDriver();
 	scene::ISceneManager* smgr = device->getSceneManager();
 	gui::IGUIEnvironment* guienv = device->getGUIEnvironment();
+	
+	//create Camera
+	game::MainCamera camera(smgr);
 
+	//testing
 	guienv->addStaticText(L"Hello World! Test Text!", core::rect<s32>(10, 10, 260, 22), true);
 	scene::IAnimatedMesh* mesh = smgr->getMesh("res/irr/sydney.md2");
 	if (!mesh)
@@ -36,8 +45,6 @@ int main() {
 		node->setMaterialTexture(0, driver->getTexture("res/irr/sydney.bmp"));
 	}
 
-	smgr->addCameraSceneNode(0, core::vector3df(0, 30, -40), core::vector3df(0, 5, 0));
-
 	while (device->run())
 	{
 		//rendering
@@ -47,13 +54,13 @@ int main() {
 		driver->endScene();
 
 		//show FPS
-		if((device->getTimer()->getTime() % 60) < 10)
-			std::cout << "FPS: " << driver->getFPS() << '\n';
+		//if((device->getTimer()->getTime() % 60) < 8)
+			//std::cout << "FPS: " << driver->getFPS() << '\n';
 
 		//signal InputHandler the frame is finished
 		game::InputHandler::getSingletonPtr()->frameFinished();
 	}
 
 	device->drop();
-	return 0;
+	return EXIT_SUCCESS;
 }

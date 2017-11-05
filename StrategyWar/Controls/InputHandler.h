@@ -36,17 +36,19 @@ namespace game{
 		bool isMousePressedOnce(const MouseButton button) const;
 
 		//getting the mouseWheel status
-		//  0:				no change
+		//  0:			no change
 		//  positiv value:	scrolling up
 		//  negative value: scrolling down
 		irr::f32 getWheelStatus() const;
+
+		const irr::core::vector2di& getMousePos() const { return m_mousePos; };
 
 		//Call after rendering the frame
 		void frameFinished();
 	private:
 		std::array<bool, keyCount> m_keys; //True if key is pressed
 		std::array<bool, keyCount> m_keysOnce; //True if this is the first frame, the key is pressed
-		irr::core::vector2d<irr::s32> m_mousePos; //Mous epos on screen
+		irr::core::vector2di m_mousePos; //Mouse pos on screen
 		irr::f32 m_mouseWheel; //Mouse wheel delta
 	};
 }
